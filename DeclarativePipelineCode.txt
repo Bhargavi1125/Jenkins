@@ -1,0 +1,46 @@
+pipeline
+{
+    agent any
+    stages
+    {
+     stage('ContinuousDownload ') 
+        {
+            steps
+            {
+	         git branch: 'main', url: 'https://github.com/Bhargavi1125/Jenkins.git'
+	        }
+		      
+		}
+	 stage('ContinuousBuild ') 
+	    {
+		   steps
+		   {
+		    sh 'mvn package'
+		   }
+		 }
+	 stage('ContinuousDeploy ') 
+		{
+		   steps
+		   {
+		    deploy adapters: [tomcat9(credentialsId: '732bf8a4-4500-405f-acc7-f9109b8eafaa', path: '', url: 'http://172.31.10.213:8080')], contextPath: 'testapp', war: '**/*.war'
+		   }
+		}
+	 stage('ContinuousTest ') 
+	    {
+	        steps
+	        {
+			 git branch: 'main', url: 'https://github.com/Bhargavi1125/FunctionalTesting.git'
+			 sh 'java -jar /home/ubuntu/.jenkins/workspace/DeclarativePipeline/testing.jar'
+			}
+	    }
+	 stage('ContinuousDelivery ') 
+	    {
+	        steps
+	        {
+			 input message: 'Need approval from the Manager', submitter: 'Bhar'
+			 //emailextrecipients([developers()])
+			 deploy adapters: [tomcat9(credentialsId: '732bf8a4-4500-405f-acc7-f9109b8eafaa', path: '', url: 'http://172.31.7.243:8080')], contextPath: 'prodapp', war: '**/*.war'
+			}
+		}
+    }
+}    
