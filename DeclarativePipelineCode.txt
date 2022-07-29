@@ -40,7 +40,7 @@ pipeline
 	        {
 			 input message: 'Need approval from the Manager', submitter: 'Bhar'
 			 sh 'scp /home/ubuntu/.jenkins/workspace/DeclarativePipeline/webapp/target/webapp.war ubuntu@172.31.7.243:/var/lib/tomcat9/webapps/prodapp.war'
-			 //emailextrecipients([developers()])
+			 //emailextrecipients([developers()]) mail id need to be entered
 			// deploy adapters: [tomcat9(credentialsId: '732bf8a4-4500-405f-acc7-f9109b8eafaa', path: '', url: 'http://172.31.7.243:8080')], contextPath: 'prodapp', war: '**/*.war'
 			}
 		}
