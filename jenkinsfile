@@ -14,7 +14,7 @@ node('built-in')
 						      }
 						          stage('ContinuousTest ') 
 							      {
-							            git branch: 'main', url: 'https://github.com/sumanthintime/FunctionalTesting.git'
+							            git branch: 'main', url: 'https://github.com/Bhargavi1125/FunctionalTesting.git'
 								          //sh 'java -jar /home/ubuntu/.jenkins/workspace/ScriptedPipeline/testing.jar'
 									      }
 									          stage('ContinuousDelivery ') 
